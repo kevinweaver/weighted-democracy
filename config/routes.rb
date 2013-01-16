@@ -1,4 +1,7 @@
 WeightedDemocracy::Application.routes.draw do
+  resources :issues
+
+
   root :to => 'disciplines#index'
 
   resources :disciplines do
