@@ -14,6 +14,7 @@ group :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'database_cleaner'
+  gem 'shoulda-matchers'
 end
 
 group :assets do
