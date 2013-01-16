@@ -1,10 +1,6 @@
 require 'spec_helper'
 
-
 describe UsersController do
-  def valid_session
-    {}
-  end
 
   describe "GET index" do
     it "assigns all users as @users" do

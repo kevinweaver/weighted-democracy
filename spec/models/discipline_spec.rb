@@ -13,8 +13,7 @@ describe Discipline do
     expect(build :discipline,description: nil).to_not be_valid
   end
 
-  it "it has many questions" do
-   should have_many(:questions)
+  it "has many questions" do
+    should have_many(:questions)
   end
-
 end

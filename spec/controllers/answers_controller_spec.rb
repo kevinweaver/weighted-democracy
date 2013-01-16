@@ -3,10 +3,6 @@ require 'spec_helper'
 
 describe AnswersController do
 
-  def valid_session
-    {}
-  end
-
   describe "GET index" do
     it "assigns all answers as @answers" do
       answer = create(:answer)

@@ -2,11 +2,6 @@ require 'spec_helper'
 
 
 describe QuestionsController do
-  
-  def valid_session
-    {}
-  end
-
   before :each do
     @disc = create :discipline
   end

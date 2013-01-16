@@ -5,12 +5,12 @@ group :development do
 end
 
 group :development, :test do
+  gem 'capybara'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
 
 group :test do
-  gem 'capybara'
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'database_cleaner'

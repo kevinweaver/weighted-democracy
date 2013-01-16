@@ -1,12 +1,6 @@
 require 'spec_helper'
 
-
 describe DisciplinesController do
-
-
-  def valid_session
-    {}
-  end
 
   describe "GET index" do
     it "assigns all disciplines as @disciplines" do
