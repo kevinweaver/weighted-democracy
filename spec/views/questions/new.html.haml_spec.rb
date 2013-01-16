@@ -11,7 +11,7 @@ describe "questions/new" do
   it "renders new question form" do
     render
 
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
+    # Run the generator again with the --webrat flag if you want to use webrat mquestionsatchers
     assert_select "form", :action => questions_path, :method => "post" do
       assert_select "input#question_name", :name => "question[name]"
       assert_select "textarea#question_text", :name => "question[text]"
