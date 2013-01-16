@@ -6,7 +6,7 @@ describe QuestionsController do
     @disc = create :discipline
   end
   it "ensures disciplines" do
-    get :index
+    get :index, {}, valid_session
     expect(response).to redirect_to disciplines_path
   end
 

@@ -5,12 +5,9 @@ WeightedDemocracy::Application.routes.draw do
     resources :questions
   end
     
-  #resources :questions do
-  #  resources :answers
-  #end
-  
-  resources :questions
-  resources :answers
+  resources :questions do
+    resources :answers
+  end
  
   resources :users
 
