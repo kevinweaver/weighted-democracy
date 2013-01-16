@@ -1,11 +1,14 @@
 WeightedDemocracy::Application.routes.draw do
-  resources :answers
+
+  resources :disciplines do
+    resources :questions
+  end
+    
+  resources :questions do
+    resources :answers
+  end
 
 
-  resources :questions
-
-
-  resources :disciplines
 
 
   # root :to => 'welcome#index'

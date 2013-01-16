@@ -1,8 +1,17 @@
 class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
+  before_filter :ensure_discipline
+
+  def ensure_discipline
+    @discipline = Discipline.find_by_id(params[:discipline_id])
+    if !@discipline
+      redirect_to disciplines_path
+    end
+  end
+
   def index
-    @questions = Question.all
+    @questions = @discipline.questions
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +22,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    @question = Question.find(params[:id])
-
+    @question = @discipline.questions.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @question }
@@ -24,7 +32,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.json
   def new
-    @question = Question.new
+    @question = @discipline.questions.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,14 +42,13 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
-    @question = Question.find(params[:id])
+    @question = @discipline.questions.find(params[:id])
   end
 
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(params[:question])
-
+    @question = @discipline.questions.new(params[:question])
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }

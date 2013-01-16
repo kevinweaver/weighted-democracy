@@ -13,6 +13,8 @@ describe Question do
     expect(build :question,text: nil).to_not be_valid
   end
 
-  it { should belong_to(:discipline) }
+  it "belongs to discipline" do
+    should belong_to(:discipline) 
+  end
 
 end

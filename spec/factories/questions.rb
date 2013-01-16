@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :question do
     name "MyString"
     text "MyText"
+    discipline_id 1
   end
 end
