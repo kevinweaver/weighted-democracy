@@ -3,10 +3,6 @@ require 'spec_helper'
 
 describe QuestionsController do
 
-  def valid_session
-    {}
-  end
-
   describe "GET index" do
     it "assigns all questions as @questions" do
       question = create(:question)

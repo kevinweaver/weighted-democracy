@@ -41,7 +41,7 @@ Spork.prefork do
       DatabaseCleaner.clean
     end
     config.include FactoryGirl::Syntax::Methods
-    #config.include SessionHelper
+    config.include SessionHelper
   end
 end
 
