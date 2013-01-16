@@ -2,34 +2,41 @@ require 'spec_helper'
 
 
 describe QuestionsController do
+  before :each do
+    @disc = create :discipline
+  end
+  it "ensures disciplines" do
+    get :index, {}, valid_session
+    expect(response).to redirect_to disciplines_path
+  end
 
   describe "GET index" do
     it "assigns all questions as @questions" do
-      question = create(:question)
-      get :index, {}, valid_session
+      question = create(:question, discipline_id: @disc.id)
+      get :index, {discipline_id: @disc.id}, valid_session
       assigns(:questions).should eq([question])
     end
   end
 
   describe "GET show" do
     it "assigns the requested question as @question" do
-      question = create(:question)
-      get :show, {:id => question.to_param}, valid_session
+      question = create(:question, discipline_id: @disc.id)
+      get :show, {id: question.to_param, discipline_id: @disc.id}, valid_session
       assigns(:question).should eq(question)
     end
   end
 
   describe "GET new" do
     it "assigns a new question as @question" do
-      get :new, {}, valid_session
+      get :new, {discipline_id: @disc.id}, valid_session
       assigns(:question).should be_a_new(Question)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested question as @question" do
-      question = create(:question)
-      get :edit, {:id => question.to_param}, valid_session
+      question = create(:question, discipline_id: @disc.id)
+      get :edit, {id: question.to_param, discipline_id: @disc.id}, valid_session
       assigns(:question).should eq(question)
     end
   end
@@ -38,18 +45,18 @@ describe QuestionsController do
     describe "with valid params" do
       it "creates a new Question" do
         expect {
-          post :create, {:question => attributes_for(:question)}, valid_session
+          post :create, {question: attributes_for(:question), discipline_id: @disc.id}, valid_session
         }.to change(Question, :count).by(1)
       end
 
       it "assigns a newly created question as @question" do
-        post :create, {:question => attributes_for(:question)}, valid_session
+        post :create, {:question => attributes_for(:question),discipline_id: @disc.id}, valid_session
         assigns(:question).should be_a(Question)
         assigns(:question).should be_persisted
       end
 
       it "redirects to the created question" do
-        post :create, {:question => attributes_for(:question)}, valid_session
+        post :create, {:question => attributes_for(:question),discipline_id: @disc.id}, valid_session
         response.should redirect_to(Question.last)
       end
     end
@@ -58,14 +65,14 @@ describe QuestionsController do
       it "assigns a newly created but unsaved question as @question" do
         # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
-        post :create, {:question => { "name" => "invalid value" }}, valid_session
+        post :create, {:question => { "name" => "invalid value" },discipline_id: @disc.id}, valid_session
         assigns(:question).should be_a_new(Question)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
-        post :create, {:question => { "name" => "invalid value" }}, valid_session
+        post :create, {:question => { "name" => "invalid value" },discipline_id: @disc.id}, valid_session
         response.should render_template("new")
       end
     end
@@ -80,18 +87,18 @@ describe QuestionsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Question.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => question.to_param, :question => { "name" => "MyString" }}, valid_session
+        put :update, {:id => question.to_param, :question => { "name" => "MyString" },discipline_id: @disc.id}, valid_session
       end
 
       it "assigns the requested question as @question" do
         question = create(:question)
-        put :update, {:id => question.to_param, :question => attributes_for(:question)}, valid_session
+        put :update, {:id => question.to_param, :question => attributes_for(:question),discipline_id: @disc.id}, valid_session
         assigns(:question).should eq(question)
       end
 
       it "redirects to the question" do
         question = create(:question)
-        put :update, {:id => question.to_param, :question => attributes_for(:question)}, valid_session
+        put :update, {:id => question.to_param, :question => attributes_for(:question),discipline_id: @disc.id}, valid_session
         response.should redirect_to(question)
       end
     end
@@ -101,7 +108,7 @@ describe QuestionsController do
         question = create(:question)
         # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
-        put :update, {:id => question.to_param, :question => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => question.to_param, :question => { "name" => "invalid value" },discipline_id: @disc.id}, valid_session
         assigns(:question).should eq(question)
       end
 
@@ -109,7 +116,7 @@ describe QuestionsController do
         question = create(:question)
         # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
-        put :update, {:id => question.to_param, :question => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => question.to_param, :question => { "name" => "invalid value" },discipline_id: @disc.id}, valid_session
         response.should render_template("edit")
       end
     end
@@ -119,13 +126,13 @@ describe QuestionsController do
     it "destroys the requested question" do
       question = create(:question)
       expect {
-        delete :destroy, {:id => question.to_param}, valid_session
+        delete :destroy, {:id => question.to_param,discipline_id: @disc.id}, valid_session
       }.to change(Question, :count).by(-1)
     end
 
     it "redirects to the questions list" do
       question = create(:question)
-      delete :destroy, {:id => question.to_param}, valid_session
+      delete :destroy, {:id => question.to_param,discipline_id: @disc.id}, valid_session
       response.should redirect_to(questions_url)
     end
   end

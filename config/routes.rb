@@ -4,9 +4,14 @@ WeightedDemocracy::Application.routes.draw do
 
   root :to => 'disciplines#index'
 
-  resources :answers
-  resources :questions
-  resources :disciplines
+  resources :disciplines do
+    resources :questions
+  end
+    
+  resources :questions do
+    resources :answers
+  end
+ 
   resources :users
 
   match '/login' => 'sessions#new', :as => 'login', :via => :get

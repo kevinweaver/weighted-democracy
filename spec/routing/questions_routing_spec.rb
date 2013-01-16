@@ -31,5 +31,26 @@ describe QuestionsController do
       delete("/questions/1").should route_to("questions#destroy", :id => "1")
     end
 
+    it "routes to discipline/1/questions" do
+      get("disciplines/1/questions").should route_to("questions#index", "discipline_id" => "1")
+    end
+
+    it "routes to discpline/1/questons/new" do
+      get("disciplines/1/questions/new").should route_to("questions#new", "discipline_id" => "1")
+    end
+
+    it "routes to discipline/1/questions/show" do
+      get("disciplines/1/questions/1").should route_to("questions#show", :id => "1", "discipline_id" => "1")
+    end
+
+    it "routes to disciplines/1/questions/1/edit" do
+      get("/disciplines/1/questions/1/edit").should route_to("questions#edit", :id => "1", "discipline_id" => "1")
+    end
+
+    it "routes to disciplines/1/questions/create" do
+      post("/disciplines/1/questions").should route_to("questions#create", "discipline_id" => "1")
+    end
+
+    
   end
 end
