@@ -25,6 +25,7 @@ class IssuesController < ApplicationController
   # GET /issues/new.json
   def new
     @issue = Issue.new
+    3.times { @issue.disciplines.build }
 
     respond_to do |format|
       format.html # new.html.erb

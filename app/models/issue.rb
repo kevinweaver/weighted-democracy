@@ -6,5 +6,5 @@ class Issue < ActiveRecord::Base
   has_many :issue_disciplines
   has_many :disciplines, :through => :issue_disciplines
 
-  #accepts_nested_attributes_for :issue_disciplines
+  accepts_nested_attributes_for :issue_disciplines
 end

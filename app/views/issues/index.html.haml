@@ -10,9 +10,8 @@
 
   - @issues.each do |issue|
     %tr
-      %td= issue.name
+      %td= link_to issue.name, issue
       %td= issue.description
-      %td= link_to 'Show', issue
       %td= link_to 'Edit', edit_issue_path(issue)
       %td= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' }
 
