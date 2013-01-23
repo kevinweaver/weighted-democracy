@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %title WeightedDemocracy
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .header
+      .nav
+        =link_to "Issues", issues_path
+        =link_to "Disciplines", disciplines_path
+      .logged_in
+        =current_user.email
+        =link_to "Logout", logout_path
+
+      %hr
+    .content
+      = yield
+    .footer
+
+
