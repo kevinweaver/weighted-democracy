@@ -5,11 +5,6 @@ describe DisciplinesController do
     @issue = create :issue
   end
 
-  it "ensures issue" do
-    get :index, {}, valid_session
-    expect(response).to redirect_to issues_path
-  end
-
   describe "GET index" do
     it "assigns all disciplines as @disciplines" do
       discipline = create(:discipline, issue_id: @issue.id)

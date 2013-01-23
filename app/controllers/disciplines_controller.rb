@@ -1,17 +1,6 @@
 class DisciplinesController < ApplicationController
-  # GET /disciplines
-  # GET /disciplines.json
-  before_filter :ensure_issue
-
-  def ensure_issue
-    @issue = Issue.find_by_id(params[:issue_id])
-    if !@issue
-      redirect_to issues_path
-    end
-  end
-
   def index
-    @disciplines = @issue.disciplines
+    @disciplines = Discipline.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,8 +8,6 @@ class DisciplinesController < ApplicationController
     end
   end
 
-  # GET /disciplines/1
-  # GET /disciplines/1.json
   def show
     @discipline = Discipline.find(params[:id])
 
@@ -30,8 +17,6 @@ class DisciplinesController < ApplicationController
     end
   end
 
-  # GET /disciplines/new
-  # GET /disciplines/new.json
   def new
     @discipline = Discipline.new
 
@@ -41,13 +26,10 @@ class DisciplinesController < ApplicationController
     end
   end
 
-  # GET /disciplines/1/edit
   def edit
     @discipline = Discipline.find(params[:id])
   end
 
-  # POST /disciplines
-  # POST /disciplines.json
   def create
     @discipline = Discipline.new(params[:discipline])
 
@@ -62,8 +44,6 @@ class DisciplinesController < ApplicationController
     end
   end
 
-  # PUT /disciplines/1
-  # PUT /disciplines/1.json
   def update
     @discipline = Discipline.find(params[:id])
 
@@ -78,8 +58,6 @@ class DisciplinesController < ApplicationController
     end
   end
 
-  # DELETE /disciplines/1
-  # DELETE /disciplines/1.json
   def destroy
     @discipline = Discipline.find(params[:id])
     @discipline.destroy
