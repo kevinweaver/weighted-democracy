@@ -1,7 +1,10 @@
-require 'spec_helper'
+require 'spec_helper' 
 
 describe "answers/index" do
   before(:each) do
+    assign(:question,  
+           stub_model(Question, 
+           :id => 1))
     assign(:answers, [
       stub_model(Answer,
         :text => "MyText",

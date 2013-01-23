@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe "answers/show" do
   before(:each) do
+    @question = assign(:question, stub_model(Question,
+      :id => 1,
+      :text => "What is the capital of Assyria?"))
     @answer = assign(:answer, stub_model(Answer,
       :text => "MyText",
       :question_id => 1

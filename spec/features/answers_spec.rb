@@ -3,8 +3,9 @@ require 'spec_helper'
 describe "Answers" do
   it "works! (now write some real specs)" do
     capybara_login
+    @question = create :question
 
-    visit answers_path
-    current_path.should eq answers_path
+    visit question_answers_path(@question)
+    current_path.should eq question_answers_path(@question)
   end
 end
