@@ -18,9 +18,8 @@ describe Discipline do
   end
 
   it "has a many to many relationship with issues" do
-    #should have_many(:issue_disciplines)
-    #should have_many(:issues).through(:issue_disciplines)
-    should have_and_belong_to_many(:issues)
+    should have_many(:issue_disciplines)
+    should have_many(:issues).through(:issue_disciplines)
   end
   
 end
