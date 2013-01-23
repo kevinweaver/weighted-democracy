@@ -2,6 +2,14 @@ require 'spec_helper'
 
 
 describe AnswersController do
+  before :each do
+    @question = create :question
+  end
+
+  it "ensures questions" do
+    get :index, {}, valid_session
+    expect(response).to redirect_to questions_path
+  end
 
   describe "GET index" do
     it "assigns all answers as @answers" do

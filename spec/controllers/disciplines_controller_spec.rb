@@ -1,34 +1,42 @@
 require 'spec_helper'
 
 describe DisciplinesController do
+  before :each do
+    @issue = create :issue
+  end
+
+  it "ensures issue" do
+    get :index, {}, valid_session
+    expect(response).to redirect_to issues_path
+  end
 
   describe "GET index" do
     it "assigns all disciplines as @disciplines" do
-      discipline = create(:discipline)
-      get :index, {}, valid_session
+      discipline = create(:discipline, issue_id: @issue.id)
+      get :index, {issue_id: @issue.id}, valid_session
       assigns(:disciplines).should eq([discipline])
     end
   end
 
   describe "GET show" do
     it "assigns the requested discipline as @discipline" do
-      discipline = create(:discipline)
-      get :show, {:id => discipline.to_param}, valid_session
+      discipline = create(:discipline, issue_id: @issue.id)
+      get :show, {:id => discipline.to_param, issue_id: @issue.id}, valid_session
       assigns(:discipline).should eq(discipline)
     end
   end
 
   describe "GET new" do
     it "assigns a new discipline as @discipline" do
-      get :new, {}, valid_session
+      get :new, {issue_id: @issue.id}, valid_session
       assigns(:discipline).should be_a_new(Discipline)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested discipline as @discipline" do
-      discipline = create(:discipline)
-      get :edit, {:id => discipline.to_param}, valid_session
+      discipline = create(:discipline, issue_id: @issue.id)
+      get :edit, {id: discipline.to_param, issue_id: @issue.id}, valid_session
       assigns(:discipline).should eq(discipline)
     end
   end
@@ -37,18 +45,18 @@ describe DisciplinesController do
     describe "with valid params" do
       it "creates a new Discipline" do
         expect {
-          post :create, {:discipline =>  attributes_for(:discipline)}, valid_session
+          post :create, {discipline: attributes_for(:discipline), issue_id: @issue.id}, valid_session
         }.to change(Discipline, :count).by(1)
       end
 
       it "assigns a newly created discipline as @discipline" do
-        post :create, {:discipline =>  attributes_for(:discipline)}, valid_session
+        post :create, {:discipline =>  attributes_for(:discipline), issue_id: @issue.id}, valid_session
         assigns(:discipline).should be_a(Discipline)
         assigns(:discipline).should be_persisted
       end
 
       it "redirects to the created discipline" do
-        post :create, {:discipline =>  attributes_for(:discipline)}, valid_session
+        post :create, {:discipline =>  attributes_for(:discipline), issue_id: @issue.id}, valid_session
         response.should redirect_to(Discipline.last)
       end
     end
@@ -57,14 +65,14 @@ describe DisciplinesController do
       it "assigns a newly created but unsaved discipline as @discipline" do
         # Trigger the behavior that occurs when invalid params are submitted
         Discipline.any_instance.stub(:save).and_return(false)
-        post :create, {:discipline => { "name" => "invalid value" }}, valid_session
+        post :create, {:discipline => { "name" => "invalid value" }, issue_id: @issue.id}, valid_session
         assigns(:discipline).should be_a_new(Discipline)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Discipline.any_instance.stub(:save).and_return(false)
-        post :create, {:discipline => { "name" => "invalid value" }}, valid_session
+        post :create, {:discipline => { "name" => "invalid value" }, issue_id: @issue.id}, valid_session
         response.should render_template("new")
       end
     end
@@ -79,18 +87,18 @@ describe DisciplinesController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Discipline.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => discipline.to_param, :discipline => { "name" => "MyString" }}, valid_session
+        put :update, {:id => discipline.to_param, :discipline => { "name" => "MyString" }, issue_id: @issue.id}, valid_session
       end
 
       it "assigns the requested discipline as @discipline" do
         discipline = create(:discipline)
-        put :update, {:id => discipline.to_param, :discipline => attributes_for(:discipline)}, valid_session
+        put :update, {:id => discipline.to_param, :discipline => attributes_for(:discipline), issue_id: @issue.id}, valid_session
         assigns(:discipline).should eq(discipline)
       end
 
       it "redirects to the discipline" do
         discipline = create(:discipline)
-        put :update, {:id => discipline.to_param, :discipline => attributes_for(:discipline)}, valid_session
+        put :update, {:id => discipline.to_param, :discipline => attributes_for(:discipline), issue_id: @issue.id}, valid_session
         response.should redirect_to(discipline)
       end
     end
@@ -100,7 +108,7 @@ describe DisciplinesController do
         discipline = create(:discipline)
         # Trigger the behavior that occurs when invalid params are submitted
         Discipline.any_instance.stub(:save).and_return(false)
-        put :update, {:id => discipline.to_param, :discipline => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => discipline.to_param, :discipline => { "name" => "invalid value" }, issue_id: @issue.id}, valid_session
         assigns(:discipline).should eq(discipline)
       end
 
@@ -108,7 +116,7 @@ describe DisciplinesController do
         discipline = create(:discipline)
         # Trigger the behavior that occurs when invalid params are submitted
         Discipline.any_instance.stub(:save).and_return(false)
-        put :update, {:id => discipline.to_param, :discipline => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => discipline.to_param, :discipline => { "name" => "invalid value" }, issue_id: @issue.id}, valid_session
         response.should render_template("edit")
       end
     end
@@ -118,13 +126,13 @@ describe DisciplinesController do
     it "destroys the requested discipline" do
       discipline = create(:discipline)
       expect {
-        delete :destroy, {:id => discipline.to_param}, valid_session
+        delete :destroy, {:id => discipline.to_param, issue_id: @issue.id}, valid_session
       }.to change(Discipline, :count).by(-1)
     end
 
     it "redirects to the disciplines list" do
       discipline = create(:discipline)
-      delete :destroy, {:id => discipline.to_param}, valid_session
+      delete :destroy, {:id => discipline.to_param, issue_id: @issue.id}, valid_session
       response.should redirect_to(disciplines_url)
     end
   end

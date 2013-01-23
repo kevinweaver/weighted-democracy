@@ -1,8 +1,17 @@
 class DisciplinesController < ApplicationController
   # GET /disciplines
   # GET /disciplines.json
+  before_filter :ensure_issue
+
+  def ensure_issue
+    @issue = Issue.find_by_id(params[:issue_id])
+    if !@issue
+      redirect_to issues_path
+    end
+  end
+
   def index
-    @disciplines = Discipline.all
+    @disciplines = @issue.disciplines
 
     respond_to do |format|
       format.html # index.html.erb

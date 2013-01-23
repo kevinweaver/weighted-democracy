@@ -3,6 +3,7 @@ class CreateDisciplines < ActiveRecord::Migration
     create_table :disciplines do |t|
       t.string :name
       t.text :description
+      t.integer :issue_id
 
       t.timestamps
     end

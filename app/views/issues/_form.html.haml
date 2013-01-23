@@ -12,5 +12,10 @@
   .field
     = f.label :description
     = f.text_area :description
+  .field
+    = f.fields_for :issue_disciplines do |builder| 
+      = builder.label :content, "Discipline"
+      = f.label :name
+      = f.text_area :name
   .actions
     = f.submit 'Save'

@@ -3,6 +3,10 @@ require "spec_helper"
 describe SessionsController do
   describe "routing" do
 
+    it "routes to issues by default" do
+      get("/").should route_to("issues#index")
+    end
+                               
     it "routes to #new" do
       get("/login").should route_to("sessions#new")
     end

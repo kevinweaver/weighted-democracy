@@ -1,6 +1,15 @@
 class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
+  before_filter :ensure_question
+
+  def ensure_question
+    @question = Question.find_by_id(params[:question_id])
+    if !@question
+      redirect_to questions_path
+    end
+  end
+
   def index
     @answers = Answer.all
 

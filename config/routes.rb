@@ -1,8 +1,15 @@
 WeightedDemocracy::Application.routes.draw do
-  resources :issues
+  root :to => 'issues#index'
 
+  resources :users
 
-  root :to => 'disciplines#index'
+  resources :issues do
+    resources :disciplines
+  end
+
+  #resources :disciplines do
+  #  resources :issues
+  #end
 
   resources :disciplines do
     resources :questions
@@ -12,7 +19,6 @@ WeightedDemocracy::Application.routes.draw do
     resources :answers
   end
  
-  resources :users
 
   match '/login' => 'sessions#new', :as => 'login', :via => :get
   match '/login' => 'sessions#create', :as => 'login', :via => :post
