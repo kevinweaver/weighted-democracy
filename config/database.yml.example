@@ -4,7 +4,7 @@ development:
   reconnect: false
   pool: 5
   username: root
-  password: im1coolguy
+  password:
   database: democracy
 
 test:
@@ -13,5 +13,5 @@ test:
   reconnect: false
   pool: 5
   username: root
-  password: im1coolguy
+  password:
   database: democracy_test
