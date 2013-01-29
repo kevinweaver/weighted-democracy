@@ -7,6 +7,15 @@
   %b Description:
   = @discipline.description
 
+%table
+  %tr
+    %th Name
+    %th Text
+  - @discipline.questions.each do |question|
+    %tr
+      %td= link_to question.name, discipline_question_path(@discipline, question)
+      %td= question.text
+
 = link_to 'Edit', edit_discipline_path(@discipline)
 \|
 = link_to 'Back', disciplines_path

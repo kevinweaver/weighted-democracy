@@ -6,12 +6,20 @@ describe "disciplines/show" do
       :name => "Name",
       :description => "MyText"
     ))
+    @discipline.stub(:questions).and_return([
+      stub_model(Question,
+                 :name => "QuestionName",
+                 :text => "QuestionText"),
+      stub_model(Question,
+                 :name => "QuestionName",
+                 :text => "QuestionText")])
   end
 
   it "renders attributes in <p>" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     rendered.should match(/Name/)
     rendered.should match(/MyText/)
+    assert_select "tr>td", :text => "QuestionName".to_s, :count => 2
+    assert_select "tr>td", :text => "QuestionText".to_s, :count => 2
   end
 end
