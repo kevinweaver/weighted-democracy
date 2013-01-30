@@ -7,6 +7,8 @@
   %b Description:
   = @discipline.description
 
+%p
+  %b Questions:
 %table
   %tr
     %th Name
@@ -15,6 +17,7 @@
     %tr
       %td= link_to question.name, discipline_question_path(@discipline, question)
       %td= question.text
+    %th= link_to 'New Question', new_discipline_question_path(@discipline)
 
 = link_to 'Edit', edit_discipline_path(@discipline)
 \|
