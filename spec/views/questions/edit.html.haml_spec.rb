@@ -12,7 +12,7 @@ describe "questions/edit" do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", :action => questions_path(@question), :method => "post" do
+    assert_select "form", :action => discipline_questions_path(@question), :method => "post" do
       assert_select "input#question_name", :name => "question[name]"
       assert_select "textarea#question_text", :name => "question[text]"
     end

@@ -4,7 +4,8 @@ describe "questions/new" do
   before(:each) do
     assign(:question, stub_model(Question,
       :name => "MyString",
-      :text => "MyText"
+      :text => "MyText",
+      :description_id => "1"
     ).as_new_record)
   end
 
