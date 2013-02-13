@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe AnswersController do
   before :each do
     @question = create :question
@@ -16,6 +15,11 @@ describe AnswersController do
       answer = create(:answer)
       get :index, {:question_id => @question.id}, valid_session
       assigns(:answers).should eq([answer])
+    end
+
+    it "renders the index template" do
+      get :index, {:question_id => @question.id}, valid_session
+      response.should render_template(:index)
     end
   end
 

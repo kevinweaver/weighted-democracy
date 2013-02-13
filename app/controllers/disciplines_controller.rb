@@ -10,7 +10,7 @@ class DisciplinesController < ApplicationController
 
   def show
     @discipline = Discipline.find(params[:id])
-
+    session[:discipline_id] = @discipline.id
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @discipline }

@@ -3,9 +3,7 @@ class AnswersController < ApplicationController
 
   def ensure_question
     @question = Question.find_by_id(params[:question_id])
-    if !@question
-      redirect_to questions_path
-    end
+    redirect_to questions_path if !@question
   end
 
   def index
