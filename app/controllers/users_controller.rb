@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_filter :authenticate, only: ["new", "create"]
   layout "new_user", only: ["new", "create"]
+  
   # GET /users
   # GET /users.json
   def index
@@ -27,7 +28,8 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
+    
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -43,7 +45,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+    @user.update_user_type(params[:user_type])
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
