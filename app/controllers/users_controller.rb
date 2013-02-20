@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authenticate, only: ["new", "create"]
-  layout :new_user, only: ["new", "create"]
+  layout "new_user", only: ["new", "create"]
   # GET /users
   # GET /users.json
   def index
